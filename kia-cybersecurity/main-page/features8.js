@@ -6,7 +6,7 @@ let pageContainers  = document.querySelectorAll("div[class='post-outer-container
 let postContainers1 = document.querySelectorAll("div[class='widget FeaturedPost']");
 let postContainers2 = document.querySelectorAll("article[class='post-outer-container']");
 let maxContainerLength = Math.max(pageContainers.length, postContainers1.length, postContainers2.length);
-let style = "background-color: rgb(1, 26, 22); border: 2px solid #26b4a1; border-radius: 10px; opacity: 0.92; box-shadow: 0px 0px 10px 2px #26b4a1;";
+let style = "background-color: rgb(1, 18, 16); border: 2px solid #26b4a1; border-radius: 10px; opacity: 0.92; box-shadow: 0px 0px 10px 2px #26b4a1;";
 
 for(var i=0; i < maxContainerLength; i++){
   if (pageContainers[i]){ 
