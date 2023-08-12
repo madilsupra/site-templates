@@ -19,7 +19,6 @@ for(var i=0; i < maxContainerLength; i++){
   }
   if (postContainers2[i]){
     if (location.pathname == '/'){
-      postContainers2[i].className += " box-shadow-animation";
       postContainers2[i].style = style;
     }
   }
