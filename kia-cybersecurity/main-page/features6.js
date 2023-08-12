@@ -13,7 +13,7 @@ for(var i=0; i < maxContainerLength; i++){
     pageContainers[i].style = style;
   }
   if (postContainers1[i]){ 
-    pageContainers1[i].style = style;
+    postContainers1[i].style = style;
   }
   if (postContainers2[i]){
     if (location.pathname == '/'){
