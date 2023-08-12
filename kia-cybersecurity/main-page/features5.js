@@ -10,11 +10,9 @@ let style = "background-color: rgb(1, 26, 22); border: 2px solid #26b4a1; border
 
 for(var i=0; i < maxContainerLength; i++){
   if (pageContainers[i]){ 
-    pageContainers[i].className += " box-shadow-animation";
     pageContainers[i].style = style;
   }
   if (postContainers1[i]){ 
-    postContainers1[i].className += " box-shadow-animation";
     pageContainers1[i].style = style;
   }
   if (postContainers2[i]){
