@@ -132,7 +132,7 @@ function loadTerminals(){
   for(let i=0; i < terminals.length; i++){
     let terminal       = terminals[i];
     let codes          = terminal.querySelector("div[class='terminal-content']").innerHTML;
-    let title          = terminal.querySelector("div[class='title-container']").innerText;
+    let title          = terminal.querySelector("div[class='terminal-title']").innerText;
     let linesContent   = "";
     let maxHeightAttr  = terminal.attributes.maxheight;
     let titleFontAttr  = terminal.attributes.titlefont;
