@@ -39,6 +39,16 @@ let innerCSS = `
     white-space:break-spaces;
   }`;
 
+function terminalTextToClipboard(element){
+  if(element.innerText == "Copy"){
+    setTimeout(() => {element.innerHTML = "Copy";}, 2000);
+    let terminal = element.parentElement.nextElementSibling.contentDocument;
+    let textToCopy = terminal.querySelector("pre").innerText;
+    navigator.clipboard.writeText(textToCopy);
+    element.innerHTML = "Copied!";
+  }
+}
+
 function resizeIframe(iframe, terminalMaxHeight, titleFont){
   let terminal = iframe.contentDocument.querySelector("terminal[class='all-containers']");
   let container = terminal.querySelector("div[class='codes-container']");
