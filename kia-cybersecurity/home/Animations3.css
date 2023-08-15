@@ -113,6 +113,7 @@
    background-color:#012922;
    border-bottom-left-radius:10px;
    border-bottom-right-radius:10px;
+   display:inline;
    max-width:100%;
    overflow-x:auto;
    padding:15px;
