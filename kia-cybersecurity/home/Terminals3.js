@@ -1,7 +1,6 @@
-/* Load custom terminals */
 let typesMap = new Map();
 
-let innerCSSCode = `
+let innerCSS = `
   body {
     margin:0;
     padding:0;
@@ -39,28 +38,17 @@ let innerCSSCode = `
     white-space:break-spaces;
     word-break:keep-all;
   }
-  .iframe-feature {
-    border-bottom-left-radius:10px;
-    border-bottom-right-radius:10px;
-  }`;
+`;
 
 function resizeIframe(iframe, terminalMaxHeight, titleFont){
   let terminal = iframe.contentDocument.querySelector("terminal[class='all-containers']");
   let container = terminal.querySelector("code[class='codes-container']");
+  iframe.style.borderBottomLeftRadius = "10px";
+  iframe.style.borderBottomRightRadius = "10px";
   iframe.style.width  = "100%";
   iframe.style.height = ((parseInt(container.scrollHeight) <= terminalMaxHeight) ? container.scrollHeight : terminalMaxHeight) + "px";
   container.style.width = iframe.style.width;
   iframe.previousElementSibling.style.fontFamily = titleFont;
-}
-
-function terminalTextToClipboard(element){
-  if(element.innerText == "Copy"){
-    setTimeout(() => {element.innerHTML = "Copy";}, 2000);
-    let terminal = element.parentElement.nextElementSibling.contentDocument;
-    let textToCopy = terminal.querySelector("code[class='codes-container']").innerText;
-    navigator.clipboard.writeText(textToCopy);
-    element.innerHTML = "Copied!";
-  }
 }
 
 function getTerminalContent(linesContent, codesContent, maxHeight=400, title="", type="terminal", titleFont="", trim="false"){
@@ -71,28 +59,24 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
       <div style="padding:3px;"><b>${typeCapitalized}${typesMap[type] ? ("-"+typesMap[type]):""}:</b>&nbsp;${title}</div>
       <div class="copy-button" onclick="terminalTextToClipboard(this);">Copy</div>
     </div>
-    <iframe class="iframe-feature" onload="resizeIframe(this, ${maxHeight}, ${titleFont})" scrolling="yes" frameborder="0" srcdoc="
-    <!DOCTYPE html>
-      <html>
-        <head></head>
+    <iframe onload="resizeIframe(this, ${maxHeight}, ${titleFont})" scrolling="yes" frameborder="0" srcdoc="
+      <!DOCTYPE html>
+        <html>
+          <head></head>
           <body>
-            <style type='text/css'>${innerCSSCode}</style>
+            <style type='text/css'>${innerCSS}</style>
             <terminal class='all-containers'>
               <code><div class='lines-container'>${linesContent}</div></code>
-              <code class='codes-container'>
-                ${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;')}
-              </code>
+              <code class='codes-container'>${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;")}</code>
             </terminal>
           </body>
-      </html>
-    "></iframe>`;
+        </html>
+      "></iframe>`;
   return source;
 }
 
 function loadTerminals(){
-  
   let terminals = document.querySelectorAll("terminal");
-  
   for(let i=0; i < terminals.length; i++){
     let terminal       = terminals[i];
     let codes          = terminal.querySelector("div[class='terminal-content']").innerHTML;
@@ -102,19 +86,17 @@ function loadTerminals(){
     let titleFontAttr  = terminal.attributes.titlefont;
     let trimAttr       = terminal.attributes.trim;
     let typeAttr       = terminal.attributes.type;
-    
     for(let line = 1; line < codes.split("\n").length + 1; line++){
       linesContent += `${line}<br/>`;
     }
     if (typeAttr){
       if (!(typeAttr.value in typesMap)) {typesMap[typeAttr.value] = 0;}
       typesMap[typeAttr.value] += 1;
-    } else if(!typesMap['terminal']) {
-      typesMap['terminal'] = 1;
+    } else if(
+      !typesMap['terminal']) {typesMap['terminal'] = 1;
     } else {
       typesMap['terminal'] += 1
     }
-    
     terminal.outerHTML = getTerminalContent(
       linesContent,
       codes,
