@@ -77,7 +77,7 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
             <style type='text/css'>${innerCSS}</style>
             <terminal class='all-containers'>
               <code><div class='lines-container'>${linesContent}</div></code>
-              <code class='codes-container'>${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;")}</code>
+              <code class='codes-container'>${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;").replaceAll("/", "&amp;sol;")}</code>
             </terminal>
           </body>
         </html>
