@@ -80,7 +80,7 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
             <terminal class='all-containers'>
               <code><div class='lines-container'>${linesContent}</div></code>
               <code class='codes-container'>
-                ${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;")}
+                ${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;')}
               </code>
             </terminal>
           </body>
