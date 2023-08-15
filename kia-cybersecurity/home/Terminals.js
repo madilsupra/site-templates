@@ -1,4 +1,3 @@
-
 /* Load custom terminals */
 let typesMap = new Map();
 
@@ -80,7 +79,9 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
             <style type='text/css'>${innerCSSCode}</style>
             <terminal class='all-containers'>
               <code><div class='lines-container'>${linesContent}</div></code>
-              <code class='codes-container'>${codes.replaceAll(' ', '&nbsp;').replace('-', '&#8209;')}</code>
+              <code class='codes-container'>
+                ${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;")}
+              </code>
             </terminal>
           </body>
       </html>
