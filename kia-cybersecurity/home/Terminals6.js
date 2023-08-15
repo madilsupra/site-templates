@@ -42,7 +42,7 @@ let innerCSS = `
 
 function resizeIframe(iframe, terminalMaxHeight, titleFont){
   let terminal = iframe.contentDocument.querySelector("terminal[class='all-containers']");
-  let container = terminal.querySelector("code[class='codes-container']");
+  let container = terminal.querySelector("div[class='codes-container']");
   iframe.style.borderBottomLeftRadius = "10px";
   iframe.style.borderBottomRightRadius = "10px";
   iframe.style.width  = "100%";
@@ -77,7 +77,7 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
             <style type='text/css'>${innerCSS}</style>
             <terminal class='all-containers'>
               <code><div class='lines-container'>${linesContent}</div></code>
-              <code class='codes-container'>${codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;").replaceAll("/", "&amp;sol;")}</code>
+              <div class='codes-container'><pre>${codes}</pre></div>
             </terminal>
           </body>
         </html>
