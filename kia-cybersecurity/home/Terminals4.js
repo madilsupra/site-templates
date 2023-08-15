@@ -51,6 +51,16 @@ function resizeIframe(iframe, terminalMaxHeight, titleFont){
   iframe.previousElementSibling.style.fontFamily = titleFont;
 }
 
+function terminalTextToClipboard(element){
+  if(element.innerText == "Copy"){
+    setTimeout(() => {element.innerHTML = "Copy";}, 2000);
+    let terminal = element.parentElement.nextElementSibling.contentDocument;
+    let textToCopy = terminal.querySelector("code[class='codes-container']").innerText;
+    navigator.clipboard.writeText(textToCopy);
+    element.innerHTML = "Copied!";
+  }
+}
+
 function getTerminalContent(linesContent, codesContent, maxHeight=400, title="", type="terminal", titleFont="", trim="false"){
   let codes = trim == "true" ? codesContent.trim() : codesContent;
   let typeCapitalized = type.charAt(0).toUpperCase() + type.substring(1, type.length).toLowerCase();
