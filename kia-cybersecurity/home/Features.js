@@ -43,9 +43,7 @@ document.getElementById("sidebar_bottom").style = "background:transparent;";
 document.querySelector("a[class='report_abuse']").style="color:cyan;selection-color:red;";
 
 let customElements = document.querySelectorAll("div[class='widget HTML']");
-for(var i=0; i < customElements.length; i++){
-    customElements[i].style="border:0px dotted;";
-}
+customElements.forEach(item => {item.style.border = "0px";});
 
 
 /* Load custom terminals */
@@ -128,7 +126,9 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
 }
 
 function loadTerminals(){
+  
   let terminals = document.querySelectorAll("terminal");
+  
   for(let i=0; i < terminals.length; i++){
     let terminal       = terminals[i];
     let codes          = terminal.querySelector("div[class='terminal-content']").innerHTML;
@@ -138,6 +138,7 @@ function loadTerminals(){
     let titleFontAttr  = terminal.attributes.titlefont;
     let trimAttr       = terminal.attributes.trim;
     let typeAttr       = terminal.attributes.type;
+    
     for(let line = 1; line < codes.split("\n").length + 1; line++){
       linesContent += `${line}<br/>`;
     }
@@ -149,6 +150,7 @@ function loadTerminals(){
     } else {
       typesMap['terminal'] += 1
     }
+    
     terminal.outerHTML = getTerminalContent(
       linesContent,
       codes,
