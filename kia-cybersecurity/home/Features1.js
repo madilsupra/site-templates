@@ -49,7 +49,7 @@ customElements.forEach(item => {item.style.border = "0px";});
 /* Load custom terminals */
 let typesMap = new Map();
 
-let innerCSS = `
+let innerCSSCode = `
   body {
     margin:0;
     padding:0;
@@ -114,7 +114,7 @@ function getTerminalContent(linesContent, codesContent, maxHeight=400, title="",
       <html>
         <head></head>
           <body>
-            <style type='text/css'>${innerCSS}</style>
+            <style type='text/css'>${innerCSSCode}</style>
             <terminal class='all-containers'>
               <code><div class='lines-container'>${linesContent}</div></code>
               <code class='codes-container'>${codes.replaceAll(' ', '&nbsp;').replace('-', '&#8209;')}</code>
