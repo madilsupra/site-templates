@@ -62,6 +62,7 @@ function resizeIframe(iframe, terminalMaxHeight, titleFont){
 
 function getTerminalContent(linesContent, codesContent, maxHeight=400, title="", type="terminal", titleFont="", trim="false"){
   let codes = trim == "true" ? codesContent.trim() : codesContent;
+  codes = codes.replaceAll(' ', '&nbsp;').replaceAll('-', '&#8209;').replaceAll('"', "&amp;quot;")
   let typeCapitalized = type.charAt(0).toUpperCase() + type.substring(1, type.length).toLowerCase();
   let source = `
     <div class="terminal-title">
